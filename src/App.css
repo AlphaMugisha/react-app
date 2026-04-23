@@ -5,12 +5,14 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 :root {
-  /* COLORS */
   --primary: #27ae60;
   --primary-dark: #1e8449;
+  --primary-light: #e8f8f0;
 
   --accent: #3498db;
   --accent-dark: #2c80b4;
@@ -18,25 +20,42 @@
   --cta: #e67e22;
   --cta-dark: #ca6b1c;
 
-  --text: #333;
-  --bg: #f4f6f8;
+  --text: #1a1a2e;
+  --text-muted: #6b7280;
 
-  /* UI */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --bg: #f0f2f5;
+  --surface: #ffffff;
+  --border: rgba(0, 0, 0, 0.08);
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.10);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.12);
 
   --radius-sm: 8px;
   --radius-md: 12px;
-  --radius-lg: 16px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
 
-  --transition: 0.25s ease;
+  --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #f0f2f5;
+    --text-muted: #9ca3af;
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --border: rgba(255, 255, 255, 0.08);
+    --primary-light: #0d2e1a;
+  }
 }
 
 body {
-  margin: 0;
-  font-family: system-ui, Arial, sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
   background: var(--bg);
   color: var(--text);
+  -webkit-font-smoothing: antialiased;
 }
 
 
@@ -44,11 +63,18 @@ body {
    HEADER
    ============================================= */
 header {
-  background: #1a1a1a;
-  color: #fff;
-  padding: 16px;
-  text-align: center;
+  background: var(--surface);
+  border-bottom: 0.5px solid var(--border);
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   font-weight: 600;
+  font-size: 15px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(12px);
 }
 
 
@@ -57,25 +83,43 @@ header {
    ============================================= */
 .hero {
   text-align: center;
-  padding: 60px 20px;
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  padding: 80px 24px 60px;
+  background: linear-gradient(160deg, #1e3a2f 0%, #166534 50%, #1e8449 100%);
   color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
 }
 
 .hero h1 {
-  font-size: 2.2rem;
-  margin-bottom: 10px;
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 12px;
+  position: relative;
 }
 
 .hero p {
-  opacity: 0.9;
+  font-size: 16px;
+  opacity: 0.8;
+  max-width: 400px;
+  margin: 0 auto;
+  line-height: 1.6;
+  position: relative;
 }
 
 .hero img {
-  margin-top: 20px;
+  margin-top: 32px;
   width: 100%;
-  max-width: 500px;
-  border-radius: var(--radius-lg);
+  max-width: 480px;
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 
@@ -84,20 +128,26 @@ header {
    ============================================= */
 .search-bar {
   display: block;
-  margin: 25px auto;
-  padding: 12px;
-  width: 260px;
-
-  border: 1px solid #ccc;
-  border-radius: var(--radius-sm);
-
+  margin: 28px auto;
+  padding: 11px 18px;
+  width: min(280px, 90%);
+  font-size: 14px;
+  color: var(--text);
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 999px;
   outline: none;
   transition: var(--transition);
+  box-shadow: var(--shadow-sm);
 }
 
 .search-bar:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 6px rgba(39, 174, 96, 0.3);
+  box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.15);
+}
+
+.search-bar::placeholder {
+  color: var(--text-muted);
 }
 
 
@@ -106,22 +156,27 @@ header {
    ============================================= */
 .special-btn {
   display: block;
-  margin: 20px auto;
-  padding: 14px 28px;
-
+  margin: 8px auto 24px;
+  padding: 13px 32px;
   background: linear-gradient(135deg, var(--cta), var(--cta-dark));
   color: white;
-
   border: none;
-  border-radius: var(--radius-md);
-
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
   cursor: pointer;
   transition: var(--transition);
+  box-shadow: 0 2px 12px rgba(230, 126, 34, 0.35);
 }
 
 .special-btn:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 6px 20px rgba(230, 126, 34, 0.45);
+}
+
+.special-btn:active {
+  transform: translateY(0);
 }
 
 
@@ -130,16 +185,9 @@ header {
    ============================================= */
 .product-grid {
   display: grid;
-  gap: 20px;
-  padding: 20px;
-
-  grid-template-columns: repeat(2, 1fr);
-}
-
-@media (min-width: 768px) {
-  .product-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  gap: 18px;
+  padding: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
 
@@ -147,34 +195,63 @@ header {
    PRODUCT CARD
    ============================================= */
 .product-card {
-  background: white;
-  padding: 16px;
-  border-radius: var(--radius-md);
-  text-align: center;
-
-  box-shadow: var(--shadow-sm);
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  border: 0.5px solid var(--border);
+  overflow: hidden;
   transition: var(--transition);
+  position: relative;
 }
 
 .product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent;
 }
 
 .product-card img {
   width: 100%;
-  height: 150px;
+  height: 160px;
   object-fit: cover;
-  border-radius: var(--radius-sm);
+  display: block;
+}
+
+/* NEW: padding wrapper so image bleeds edge-to-edge */
+.product-card-body {
+  padding: 14px 16px 16px;
 }
 
 .product-card h3 {
-  margin: 10px 0 5px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+
+/* NEW: category label */
+.product-card .category {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--primary);
+  margin-bottom: 8px;
 }
 
 .product-card .price {
-  font-weight: bold;
+  font-size: 18px;
+  font-weight: 700;
   color: var(--primary);
+  margin-bottom: 12px;
+}
+
+/* NEW: optional strikethrough original price */
+.product-card .price span {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 400;
+  text-decoration: line-through;
+  margin-left: 6px;
 }
 
 
@@ -182,34 +259,36 @@ header {
    ADD TO CART BUTTON
    ============================================= */
 .add-btn {
-  margin-top: 10px;
   padding: 10px;
   width: 100%;
-
-  background: var(--accent);
-  color: white;
-
+  background: var(--primary-light);
+  color: var(--primary-dark);
   border: none;
   border-radius: var(--radius-sm);
-
+  font-size: 13px;
+  font-weight: 600;
   cursor: pointer;
   transition: var(--transition);
 }
 
 .add-btn:hover {
-  background: var(--accent-dark);
-  transform: translateY(-2px);
+  background: var(--primary);
+  color: white;
+}
+
+.add-btn:active {
+  opacity: 0.85;
 }
 
 
 /* =============================================
-   EMPTY STATE (when no products)
+   EMPTY STATE
    ============================================= */
 .empty {
   text-align: center;
-  margin: 40px 0;
-  font-size: 18px;
-  opacity: 0.6;
+  margin: 60px 0;
+  font-size: 16px;
+  color: var(--text-muted);
 }
 
 
@@ -217,10 +296,11 @@ header {
    FOOTER
    ============================================= */
 footer {
-  margin-top: 40px;
-  padding: 16px;
-  background: #1a1a1a;
-  color: #ccc;
+  margin-top: 60px;
+  padding: 20px 24px;
+  border-top: 0.5px solid var(--border);
+  color: var(--text-muted);
   text-align: center;
-  font-size: 13px;
+  font-size: 12px;
+  letter-spacing: 0.2px;
 }
