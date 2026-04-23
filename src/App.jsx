@@ -21,7 +21,7 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header name={"alpha"}/>
       <Hero />
 
       <SearchBar
@@ -29,7 +29,6 @@ function App() {
         onChange={(e) => setSearch(e.target.value)}
       />
 
-      {/* 🔥 TOGGLE BUTTON */}
       <button
         className="special-btn"
         onClick={() => setShowProducts(!showProducts)}
@@ -37,7 +36,6 @@ function App() {
         {showProducts ? "Hide Products" : "Show Products"}
       </button>
 
-      {/* 🛒 SHOW ALL PRODUCTS ONLY WHEN CLICKED */}
       {showProducts && (
         <ProductList
           products={filteredProducts}
