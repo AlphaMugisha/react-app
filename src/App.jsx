@@ -1,11 +1,16 @@
-// src/App.jsx
 function App() {
   return (
-    <div>
-      <h1>Hello, React!</h1>
-      <p>This is the most gay thing that i ever saw gng</p>
-    </div>
-  )
+    <>
+      <div className="hero">
+        <h1>Karibu Simba Supermarket!</h1>
+        <p>Fresh groceries, delivered across Kigali.</p>
+        <img
+          src="https://placehold.co/600x300"
+          alt="Supermarket banner"
+        />
+      </div>
+    </>
+  );
 }
 
-export default App
+export default App;
