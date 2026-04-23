@@ -199,3 +199,16 @@
 .product-card h3 {
   margin: 10px 0 5px;
 }
+button {
+  padding: 10px 20px;
+  margin: 20px;
+  border: none;
+  border-radius: 8px;
+  background: #28a745;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #218838;
+}
