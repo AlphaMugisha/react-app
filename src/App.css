@@ -150,3 +150,17 @@ footer {
   border-color: #27ae60;
   box-shadow: 0 0 8px rgba(39, 174, 96, 0.3);
 }
+.product-grid {
+  display: grid;
+  gap: 20px;
+  padding: 20px;
+
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* Desktop */
+@media (min-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
