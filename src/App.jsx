@@ -4,13 +4,12 @@ import Hero from "./components/Hero";
 import Footer from "./components/Footer";
 import SearchBar from "./components/SearchBar";
 import ProductList from "./components/ProductList";
-import ProductCard from "./components/ProductCard";
 import products from "./data/Products";
 import "./App.css";
 
 function App() {
   const [search, setSearch] = useState("");
-  const [showSpecial, setShowSpecial] = useState(false);
+  const [showProducts, setShowProducts] = useState(false);
 
   const handleAddToCart = (product) => {
     console.log("Added:", product.name);
@@ -30,26 +29,21 @@ function App() {
         onChange={(e) => setSearch(e.target.value)}
       />
 
+      {/* 🔥 TOGGLE BUTTON */}
       <button
         className="special-btn"
-        onClick={() => setShowSpecial(!showSpecial)}
+        onClick={() => setShowProducts(!showProducts)}
       >
-        {showSpecial ? "Hide Today's Special" : "Show Today's Special"}
+        {showProducts ? "Hide Products" : "Show Products"}
       </button>
 
-      {showSpecial && (
-        <div className="featured">
-          <ProductCard
-            product={products[0]}
-            onAddToCart={handleAddToCart}
-          />
-        </div>
+      {/* 🛒 SHOW ALL PRODUCTS ONLY WHEN CLICKED */}
+      {showProducts && (
+        <ProductList
+          products={filteredProducts}
+          onAddToCart={handleAddToCart}
+        />
       )}
-
-      <ProductList
-        products={filteredProducts}
-        onAddToCart={handleAddToCart}
-      />
 
       <Footer />
     </>
