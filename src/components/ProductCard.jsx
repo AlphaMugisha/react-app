@@ -1,4 +1,4 @@
-function ProductCard({ product }) {
+function ProductCard({ product, onAddToCart }) {
   const { name, price, image } = product;
 
   const formattedPrice = new Intl.NumberFormat("en-RW", {
@@ -11,6 +11,13 @@ function ProductCard({ product }) {
       <img src={image} alt={name} />
       <h3>{name}</h3>
       <p>{formattedPrice}</p>
+
+      <button
+        className="add-btn"
+        onClick={() => onAddToCart(product)}
+      >
+        Add to cart
+      </button>
     </div>
   );
 }
