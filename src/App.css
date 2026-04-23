@@ -265,3 +265,23 @@ footer a {
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+/* FIX FEATURED PRODUCT SIZE */
+.featured {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.featured .product-card {
+  width: 260px !important;
+}
+
+/* FIX PRODUCT IMAGE SIZE */
+.product-card img {
+  height: 150px;
+  object-fit: cover;
+}
+.featured .product-card {
+  border: 2px solid gold;
+  transform: scale(1.05);
+}

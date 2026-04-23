@@ -5,7 +5,7 @@ import Footer from "./components/Footer";
 import SearchBar from "./components/SearchBar";
 import ProductList from "./components/ProductList";
 import ProductCard from "./components/ProductCard";
-import products from "./data/Products"; // ⚠️ lowercase
+import products from "./data/Products";
 import "./App.css";
 
 function App() {
@@ -38,10 +38,12 @@ function App() {
       </button>
 
       {showSpecial && (
-        <ProductCard
-          product={products[0]}
-          onAddToCart={handleAddToCart}
-        />
+        <div className="featured">
+          <ProductCard
+            product={products[0]}
+            onAddToCart={handleAddToCart}
+          />
+        </div>
       )}
 
       <ProductList
